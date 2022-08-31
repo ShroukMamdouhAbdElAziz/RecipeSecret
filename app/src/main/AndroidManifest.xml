@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.therecipesecret">
+    package="com.example.therecipesecret" >
+    <!--
+ add internet install-time permission for using the internet
+ + using this tag with the internet permission android:usesCleartextTraffic="true"
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -8,10 +13,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TheRecipeSecret">
+        android:theme="@style/Theme.TheRecipeSecret"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".mealdetails.view.MealActivity"
+            android:exported="false" />
         <activity
             android:name=".Splash"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +29,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

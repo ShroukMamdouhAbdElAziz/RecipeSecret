@@ -3,8 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/drawable/ic_favorite.xml" value="0.1205" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/font/fonts.xml" value="0.1" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/activity_meal.xml" value="0.18" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_categories.xml" value="0.15555555555555556" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_favorite.xml" value="0.15555555555555556" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/popular_items.xml" value="0.1" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/popular_items_row_layout.xml" value="0.1" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/menu/bottomnavigation_menu.xml" value="0.15" />
       </map>
     </option>
   </component>
