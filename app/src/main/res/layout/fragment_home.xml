@@ -97,7 +97,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_view_meals_popular"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_110sdp"
+        android:layout_height="@dimen/_90sdp"
         android:layout_marginStart="@dimen/_25sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,11 +1,10 @@
 package com.example.therecipesecret.home.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.therecipesecret.common.model.CategoryMealList
-import com.example.therecipesecret.common.model.Meal
+import com.example.therecipesecret.common.model.CategoryList
+import com.example.therecipesecret.common.model.PopularMealsList
 import com.example.therecipesecret.common.model.MealList
 import com.example.therecipesecret.common.repository.Repository
 import kotlinx.coroutines.launch
@@ -13,7 +12,8 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val repository: Repository):ViewModel(){
 
     var myRespone:MutableLiveData<MealList> =  MutableLiveData()
-    var result:MutableLiveData<CategoryMealList> = MutableLiveData()
+    var result:MutableLiveData<PopularMealsList> = MutableLiveData()
+    var categoriesResponse:MutableLiveData<CategoryList> = MutableLiveData()
 
 
     fun getRandomMeal(){
@@ -31,6 +31,13 @@ class HomeViewModel(private val repository: Repository):ViewModel(){
 
         }
 
+    }
+
+    fun getCategories(){
+        viewModelScope.launch {
+            var response =repository.getCategories()
+            categoriesResponse.value=response
+        }
     }
 
 

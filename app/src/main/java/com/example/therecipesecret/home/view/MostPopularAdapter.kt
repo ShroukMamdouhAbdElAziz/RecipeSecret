@@ -5,15 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-import com.example.therecipesecret.common.model.CategoryMeal
+import com.example.therecipesecret.common.model.PopularMeals
 import com.example.therecipesecret.databinding.PopularItemsRowLayoutBinding
 
 
 class MostPopularAdapter(): RecyclerView.Adapter<MostPopularAdapter.PopularMealViewHolder>() {
 
-    private var mealsList = ArrayList<CategoryMeal>()
+    private var mealsList = ArrayList<PopularMeals>()
 
-    fun setMeal(mealsList:ArrayList<CategoryMeal>) {
+    fun setMeal(mealsList:ArrayList<PopularMeals>) {
         this.mealsList=mealsList
         //when we set the new List , refresh the adapter to update the view
         notifyDataSetChanged()

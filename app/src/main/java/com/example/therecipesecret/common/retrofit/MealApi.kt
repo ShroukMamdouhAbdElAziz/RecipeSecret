@@ -1,11 +1,9 @@
 package com.example.therecipesecret.common.retrofit
 
-import com.example.therecipesecret.common.model.CategoryMealList
-import com.example.therecipesecret.common.model.Meal
+import com.example.therecipesecret.common.model.CategoryList
+import com.example.therecipesecret.common.model.PopularMealsList
 import com.example.therecipesecret.common.model.MealList
-import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MealApi {
@@ -18,5 +16,8 @@ interface MealApi {
    suspend fun getRandomMealInformation(@Query("i") idMeal:String):MealList
 
    @GET("filter.php")
-   suspend fun getPopularItems(@Query("c") categoryName:String):CategoryMealList
+   suspend fun getPopularItems(@Query("c") categoryName:String):PopularMealsList
+
+   @GET("categories.php")
+   suspend fun getCategories():CategoryList
 }

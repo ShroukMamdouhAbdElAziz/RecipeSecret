@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.therecipesecret.R
+import com.example.therecipesecret.databinding.FragmentCategoriesBinding
+import com.example.therecipesecret.databinding.FragmentHomeBinding
 
 class CategoriesFragment : Fragment() {
+
+    lateinit var binding: FragmentCategoriesBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,11 +20,12 @@ class CategoriesFragment : Fragment() {
         }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?,   savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+        binding= FragmentCategoriesBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
 }
