@@ -25,6 +25,7 @@
         android:textColor="@color/black"
         android:text="Categoty name"
         android:fontFamily="@font/fonts"
-        android:layout_marginTop="@dimen/_3sdp"/>
+        android:layout_marginTop="@dimen/_3sdp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

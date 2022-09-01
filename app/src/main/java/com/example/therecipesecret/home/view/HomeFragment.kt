@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.*
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
+
 import com.example.therecipesecret.common.model.Category
 import com.example.therecipesecret.common.model.CategoryList
 import com.example.therecipesecret.common.model.PopularMeals
@@ -23,6 +23,7 @@ import com.example.therecipesecret.common.repository.Repository
 import com.example.therecipesecret.databinding.FragmentHomeBinding
 import com.example.therecipesecret.home.viewmodel.HomeViewModel
 import com.example.therecipesecret.home.viewmodel.HomeViewModelFactory
+import com.squareup.picasso.Picasso
 
 class HomeFragment : Fragment() {
 
@@ -31,7 +32,7 @@ class HomeFragment : Fragment() {
     lateinit var randomMeal: Meal
     lateinit var popularItemAdapter: MostPopularAdapter
     lateinit var categoriesAdapter: CategoryAdapter
-    var mealsList = ArrayList<PopularMeals>()
+
 
     // 3 keys for the extra for the Intent
     companion object{
@@ -75,9 +76,19 @@ class HomeFragment : Fragment() {
         observePopularItems()
         observeCategories()
 
+        onPopularItemClick()
 
 
+    }
 
+    private fun onPopularItemClick() {
+       popularItemAdapter.onItemClick={
+           val intent= Intent(activity,MealActivity::class.java)
+           intent.putExtra(MEAL_ID,it.idMeal)
+           intent.putExtra(MEAL_NAME,it.strMeal)
+           intent.putExtra(MEAL_THUMB,it.strMealThumb)
+           startActivity(intent)
+       }
     }
 
     private fun prepareCategoriesRecyclerView() {
@@ -95,7 +106,7 @@ class HomeFragment : Fragment() {
 
             randomMeal=response.meals[0]
             var s=randomMeal.strMealThumb
-            Glide.with(this)
+            Picasso.get()
                 .load(s)
                 .into(binding.imgRandomMeal)
 
@@ -118,7 +129,7 @@ class HomeFragment : Fragment() {
     fun observePopularItems(){
         homeViewModel.getPopularItems("Seafood")
         homeViewModel.result.observe(viewLifecycleOwner, Observer {
-            popularItemAdapter.setMeal(mealsList)
+            popularItemAdapter.setMeal(it.meals as ArrayList<PopularMeals>)
         })
     }
 
@@ -135,7 +146,7 @@ class HomeFragment : Fragment() {
     fun observeCategories(){
         homeViewModel.getCategories()
         homeViewModel.categoriesResponse.observe(viewLifecycleOwner, Observer {
-            categoriesAdapter.setCategoryList(categoryMeals = ArrayList<Category>())
+            categoriesAdapter.setCategoryList(it.categories as ArrayList<Category>)
         })
     }
 

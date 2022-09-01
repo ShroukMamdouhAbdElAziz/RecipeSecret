@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/_15sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home.view.HomeFragment">
 
  <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:fillViewport="true">
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -133,7 +135,8 @@
             android:id="@+id/rec_view_categories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"/>
+            android:scrollbars="none"
+            />
 
     </androidx.cardview.widget.CardView>
 

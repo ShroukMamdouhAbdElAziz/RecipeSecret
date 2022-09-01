@@ -3,9 +3,9 @@ package com.example.therecipesecret.home.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.therecipesecret.common.model.Category
 import com.example.therecipesecret.databinding.CategoryItemBinding
+import com.squareup.picasso.Picasso
 
 
 class CategoryAdapter(): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -27,7 +27,7 @@ class CategoryAdapter(): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
 
-       Glide.with(holder.itemView)
+      Picasso.get()
            .load(categoryMeals[position].strCategoryThumb)
            .into(holder.binding.imgCategoty)
 

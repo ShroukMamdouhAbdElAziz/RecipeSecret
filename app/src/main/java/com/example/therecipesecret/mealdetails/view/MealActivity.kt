@@ -10,7 +10,7 @@ import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
+
 import com.example.therecipesecret.R
 import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.repository.Repository
@@ -20,6 +20,7 @@ import com.example.therecipesecret.home.viewmodel.HomeViewModel
 import com.example.therecipesecret.home.viewmodel.HomeViewModelFactory
 import com.example.therecipesecret.mealdetails.viewmodel.MealDetailsViewModel
 import com.example.therecipesecret.mealdetails.viewmodel.MealDetailsViewModelFactory
+import com.squareup.picasso.Picasso
 import retrofit2.http.Url
 
 class MealActivity : AppCompatActivity() {
@@ -61,7 +62,7 @@ class MealActivity : AppCompatActivity() {
     }
 
     private fun setInformationInView(){
-        Glide.with(this)
+        Picasso.get()
             .load(mealThumb)
             .into(binding.imgMealDetails)
 

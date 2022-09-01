@@ -3,13 +3,20 @@ package com.example.therecipesecret.home.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.example.therecipesecret.common.model.Category
+
 
 import com.example.therecipesecret.common.model.PopularMeals
 import com.example.therecipesecret.databinding.PopularItemsRowLayoutBinding
+import com.squareup.picasso.Picasso
+
 
 
 class MostPopularAdapter(): RecyclerView.Adapter<MostPopularAdapter.PopularMealViewHolder>() {
+
+    // You can use a lambda as the click callback, e.g. as a class property(method) of your adapter
+    // the data type here(for the argument) is PopularMeals and the return is unit
+    lateinit var onItemClick :((PopularMeals)->Unit)
 
     private var mealsList = ArrayList<PopularMeals>()
 
@@ -28,9 +35,14 @@ class MostPopularAdapter(): RecyclerView.Adapter<MostPopularAdapter.PopularMealV
 
     override fun onBindViewHolder(holder: PopularMealViewHolder, position: Int) {
 
-       Glide.with(holder.itemView)
-           .load(mealsList[position].strMealThumb)
-           .into(holder.binding.imgPopularMealItem)
+        Picasso.get().load(mealsList[position].strMealThumb).into(holder.binding.imgPopularMealItem)
+
+     // onitemclick handling
+        holder.itemView.setOnClickListener {
+            onItemClick.invoke(mealsList[position])
+        }
+
+
     }
 
 
