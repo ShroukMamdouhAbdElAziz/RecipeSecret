@@ -1,6 +1,7 @@
 package com.example.therecipesecret.common.retrofit
 
 import com.example.therecipesecret.common.model.CategoryList
+import com.example.therecipesecret.common.model.CategoryMealsDetailsList
 import com.example.therecipesecret.common.model.PopularMealsList
 import com.example.therecipesecret.common.model.MealList
 import retrofit2.http.GET
@@ -20,4 +21,7 @@ interface MealApi {
 
    @GET("categories.php")
    suspend fun getCategories():CategoryList
+
+   @GET("filter.php")
+   suspend fun getMealsByCategoryName(@Query("c")strCategory:String):CategoryMealsDetailsList
 }

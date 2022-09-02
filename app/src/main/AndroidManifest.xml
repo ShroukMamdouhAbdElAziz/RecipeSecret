@@ -10,25 +10,24 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheRecipeSecret"
-
-
-
-        android:hardwareAccelerated="true"
-        android:largeHeap="true"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity
+            android:name=".categorymealsdetails.view.CategoryMealsActivity"
+            android:exported="false" />
         <activity
             android:name=".mealdetails.view.MealActivity"
             android:exported="false" />
         <activity
             android:name=".Splash"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

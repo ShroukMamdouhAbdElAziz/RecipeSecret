@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.therecipesecret.categorymealsdetails.view.CategoryMealsActivity
 
 import com.example.therecipesecret.common.model.Category
 import com.example.therecipesecret.common.model.CategoryList
@@ -39,6 +40,7 @@ class HomeFragment : Fragment() {
         const val MEAL_ID ="com.example.therecipesecret.home.view.idMeal"
         const val MEAL_NAME ="com.example.therecipesecret.home.view.strMeal"
         const val MEAL_THUMB="com.example.therecipesecret.home.view.strMealThumb"
+        const val CATEGORY_NAME ="com.example.therecipesecret.home.view.categoryName"
     }
 
 
@@ -78,7 +80,17 @@ class HomeFragment : Fragment() {
 
         onPopularItemClick()
 
+        onCategoryItemClick()
 
+
+    }
+
+    private fun onCategoryItemClick() {
+       categoriesAdapter.onItemClick={
+           val intent= Intent(activity,CategoryMealsActivity::class.java)
+           intent.putExtra(CATEGORY_NAME,it.strCategory)
+           startActivity(intent)
+       }
     }
 
     private fun onPopularItemClick() {

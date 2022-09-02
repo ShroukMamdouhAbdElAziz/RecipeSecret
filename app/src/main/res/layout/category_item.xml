@@ -6,12 +6,12 @@
 
     <ImageView
         android:id="@+id/img_categoty"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
+        android:src="@color/acccent"
         android:scaleType="fitCenter"/>
 
     <TextView
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@id/img_categoty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="@dimen/_15ssp"
+        android:textSize="@dimen/_14ssp"
         android:textColor="@color/black"
         android:text="Categoty name"
         android:fontFamily="@font/fonts"

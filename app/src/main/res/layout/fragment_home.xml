@@ -10,7 +10,7 @@
  <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:layout_marginBottom="@dimen/_30sdp"
         android:fillViewport="true">
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,7 +99,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_view_meals_popular"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_90sdp"
+        android:layout_height="@dimen/_100sdp"
         android:layout_marginStart="@dimen/_25sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +112,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:fontFamily="@font/fonts"
-        android:textSize="@dimen/_17ssp"
+        android:textSize="@dimen/_18ssp"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="Categories"
         app:layout_constraintTop_toBottomOf="@id/rec_view_meals_popular"
@@ -125,9 +125,11 @@
         android:layout_marginStart="@dimen/_25sdp"
         android:layout_marginEnd="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:elevation="@dimen/_2sdp"
         app:cardCornerRadius="@dimen/_10sdp"
         app:cardUseCompatPadding="true"
         app:layout_constraintStart_toStartOf="parent"
+        app:cardPreventCornerOverlap="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_categories">
 

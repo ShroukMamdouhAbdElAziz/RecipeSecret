@@ -10,6 +10,8 @@ import com.squareup.picasso.Picasso
 
 class CategoryAdapter(): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
+    lateinit var onItemClick:((Category)->Unit)
+
     private var categoryMeals = ArrayList<Category>()
 
     fun setCategoryList(categoryMeals:ArrayList<Category>) {
@@ -32,6 +34,12 @@ class CategoryAdapter(): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder
            .into(holder.binding.imgCategoty)
 
         holder.binding.tvCategoryName.text=categoryMeals[position].strCategory
+
+        // handling on ItemClick
+
+        holder.itemView.setOnClickListener {
+            onItemClick.invoke(categoryMeals[position])
+        }
     }
 
 
