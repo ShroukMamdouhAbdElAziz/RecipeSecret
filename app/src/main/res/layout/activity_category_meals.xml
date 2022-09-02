@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".categorymealsdetails.view.CategoryMealsActivity">
+
 <TextView
     android:id="@+id/tv_category_count"
     android:layout_width="wrap_content"
@@ -17,7 +18,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     android:gravity="center"
-    android:layout_marginTop="@dimen/_8sdp"/>
+    android:layout_marginTop="@dimen/_12sdp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_meals"

@@ -11,9 +11,6 @@ import com.squareup.picasso.Picasso
 
 class CategoryMealsAdapter(): RecyclerView.Adapter<CategoryMealsAdapter.CategoryMealsViewHolder>() {
 
-    // You can use a lambda as the click callback, e.g. as a class property(method) of your adapter
-    // the data type here(for the argument) is PopularMeals and the return is unit
-    lateinit var onItemClick :((CategoryMealsDetails)->Unit)
 
     private var categoryMealsList = ArrayList<CategoryMealsDetails>()
 
@@ -34,14 +31,6 @@ class CategoryMealsAdapter(): RecyclerView.Adapter<CategoryMealsAdapter.Category
 
         Picasso.get().load(categoryMealsList[position].strMealThumb).into(holder.binding.imgMeal)
         holder.binding.tvMealName.text= categoryMealsList[position].strMeal
-
-        // handling on ItemClick
-
-        holder.itemView.setOnClickListener {
-            onItemClick.invoke(categoryMealsList[position])
-        }
-
-
 
     }
 

@@ -1,27 +1,21 @@
 package com.example.therecipesecret.mealdetails.view
 
-import android.content.Context
+
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.View
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-
 import com.example.therecipesecret.R
-import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.repository.Repository
 import com.example.therecipesecret.databinding.ActivityMealBinding
 import com.example.therecipesecret.home.view.HomeFragment
-import com.example.therecipesecret.home.viewmodel.HomeViewModel
-import com.example.therecipesecret.home.viewmodel.HomeViewModelFactory
 import com.example.therecipesecret.mealdetails.viewmodel.MealDetailsViewModel
 import com.example.therecipesecret.mealdetails.viewmodel.MealDetailsViewModelFactory
 import com.squareup.picasso.Picasso
-import retrofit2.http.Url
+
 
 class MealActivity : AppCompatActivity() {
 
@@ -31,6 +25,7 @@ class MealActivity : AppCompatActivity() {
     lateinit var mealId:String
     lateinit var mealName:String
     lateinit var mealThumb:String
+
 
     lateinit var youtubeLink:String
 
@@ -59,6 +54,7 @@ class MealActivity : AppCompatActivity() {
         mealId= intent.getStringExtra(HomeFragment.MEAL_ID)!!
         mealName= intent.getStringExtra(HomeFragment.MEAL_NAME)!!
         mealThumb=intent.getStringExtra(HomeFragment.MEAL_THUMB)!!
+
     }
 
     private fun setInformationInView(){
@@ -74,6 +70,7 @@ class MealActivity : AppCompatActivity() {
 
     }
 
+
     private fun observeMealDeatils(){
         mealDetailsViewModel.getRandomMealInformation(mealId)
         mealDetailsViewModel.myRespone.observe(this, Observer { response->
@@ -81,9 +78,11 @@ class MealActivity : AppCompatActivity() {
             binding.tvArea.text = "Area : ${response.meals[0].strArea}"
             binding.tvCategory.text= "Category : ${response.meals[0].strCategory}"
             binding.instructionTxtViewSteps.text =response.meals[0].strInstructions
-            youtubeLink=response.meals[0].strYoutube
+            youtubeLink= response.meals[0].strYoutube!!
         })
     }
+
+
 
     // show the progress bar when the data is still loading from the API and hiding all the views
     private fun loadingCase(){
