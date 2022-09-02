@@ -9,14 +9,14 @@ import com.example.therecipesecret.common.model.Meal
 
  abstract class MealDataBase:RoomDatabase() {
 
-     abstract fun mealDao():MealDao   // get reference from interface
+     abstract fun getMealDao():MealDao   // get reference from interface
 
      companion object{
          @Volatile
-         var INSTANCE:MealDataBase?= null
+         private var INSTANCE:MealDataBase?= null
 
          @Synchronized
-         fun getDbInstance(context: Context):MealDataBase{
+         fun getDataBaseInstance(context: Context):MealDataBase{
              if (INSTANCE==null){
                  INSTANCE= Room.databaseBuilder(
                                context,

@@ -1,31 +1,46 @@
 package com.example.therecipesecret.common.repository
 
-import com.example.therecipesecret.common.model.CategoryList
-import com.example.therecipesecret.common.model.CategoryMealsDetailsList
-import com.example.therecipesecret.common.model.PopularMealsList
-import com.example.therecipesecret.common.model.MealList
+import androidx.lifecycle.LiveData
+import com.example.therecipesecret.common.model.*
+import com.example.therecipesecret.common.retrofit.MealApi
 import com.example.therecipesecret.common.retrofit.RetrofitInstance
+import com.example.therecipesecret.db.MealDao
+import com.example.therecipesecret.db.MealDataBase
 
-class Repository {
+class Repository(private val mealDao: MealDao,private val mealApi:MealApi){
 
     suspend fun getRandomMeal():MealList{
-        return RetrofitInstance.api.getRandomMeal()
+        return mealApi.getRandomMeal()
     }
 
     suspend fun getRandomMealInformation(idMeal:String):MealList{
-        return  RetrofitInstance.api.getRandomMealInformation(idMeal)
+        return  mealApi.getRandomMeal()
     }
 
     suspend fun getPopularItems(categoryName:String): PopularMealsList{
-        return RetrofitInstance.api.getPopularItems(categoryName)
+        return mealApi.getPopularItems(categoryName)
     }
 
     suspend fun getCategories():CategoryList{
-        return RetrofitInstance.api.getCategories()
+        return mealApi.getCategories()
     }
 
     suspend fun getMealsByCategoryName(strCategory:String):CategoryMealsDetailsList{
-        return RetrofitInstance.api.getMealsByCategoryName(strCategory)
+        return mealApi.getMealsByCategoryName(strCategory)
+    }
+
+    val getAllMealsFromDB:LiveData<List<Meal>> = mealDao.getAllMeals()
+
+    suspend fun addMeal(meal:Meal){
+         mealDao.insertMeal(meal)
+    }
+
+    suspend fun deleteMeal(meal:Meal){
+        mealDao.deleteMeal(meal)
+    }
+
+    suspend fun updateMeal(meal: Meal){
+       mealDao.updateMeal(meal)
     }
 
 }

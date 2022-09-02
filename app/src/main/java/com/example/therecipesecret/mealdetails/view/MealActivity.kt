@@ -2,15 +2,21 @@ package com.example.therecipesecret.mealdetails.view
 
 
 import android.content.Intent
+import android.icu.text.Transliterator
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.therecipesecret.R
+import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.repository.Repository
+import com.example.therecipesecret.common.retrofit.RetrofitInstance
 import com.example.therecipesecret.databinding.ActivityMealBinding
+import com.example.therecipesecret.db.MealDataBase
 import com.example.therecipesecret.home.view.HomeFragment
 import com.example.therecipesecret.mealdetails.viewmodel.MealDetailsViewModel
 import com.example.therecipesecret.mealdetails.viewmodel.MealDetailsViewModelFactory
@@ -26,19 +32,16 @@ class MealActivity : AppCompatActivity() {
     lateinit var mealName:String
     lateinit var mealThumb:String
 
-
     lateinit var youtubeLink:String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val repository = Repository()
-        val mealDetailsViewModelFactory = MealDetailsViewModelFactory(repository)
-        mealDetailsViewModel = ViewModelProvider(this,
-            mealDetailsViewModelFactory).get(MealDetailsViewModel::class.java)
 
+        getViewModel()
         getMealDetailsFromIntent()
         setInformationInView()
         loadingCase()
@@ -46,6 +49,30 @@ class MealActivity : AppCompatActivity() {
         observeMealDeatils()
         onYoutubeImageClick()
 
+        onFavoriteClick()
+
+    }
+
+    private fun onFavoriteClick() {
+        binding.favBtn.setOnClickListener {
+           favMeal?.let {
+               mealDetailsViewModel.insertMeal(it)
+
+
+           }
+        }
+    }
+
+    private fun getViewModel() {
+        val mealDao = MealDataBase.getDataBaseInstance(this).getMealDao()
+        val mealApi = RetrofitInstance.api
+
+        val repository = Repository(mealDao,mealApi )
+
+        val mealDetailsViewModelFactory = MealDetailsViewModelFactory(repository)
+
+        mealDetailsViewModel = ViewModelProvider(this,
+            mealDetailsViewModelFactory).get(MealDetailsViewModel::class.java)
     }
 
 
@@ -71,14 +98,18 @@ class MealActivity : AppCompatActivity() {
     }
 
 
+
+    private var favMeal: Meal?=null
+
     private fun observeMealDeatils(){
         mealDetailsViewModel.getRandomMealInformation(mealId)
-        mealDetailsViewModel.myRespone.observe(this, Observer { response->
+        mealDetailsViewModel.myRespone.observe(this, Observer {
             responseCase()
-            binding.tvArea.text = "Area : ${response.meals[0].strArea}"
-            binding.tvCategory.text= "Category : ${response.meals[0].strCategory}"
-            binding.instructionTxtViewSteps.text =response.meals[0].strInstructions
-            youtubeLink= response.meals[0].strYoutube!!
+            favMeal= it.meals[0]
+            binding.tvArea.text = "Area : ${it.meals[0].strArea}"
+            binding.tvCategory.text= "Category : ${it.meals[0].strCategory}"
+            binding.instructionTxtViewSteps.text =it.meals[0].strInstructions
+            youtubeLink= it.meals[0].strYoutube!!
         })
     }
 

@@ -10,7 +10,9 @@ import com.example.therecipesecret.categorymealsdetails.viewmodel.CategoryMealsV
 import com.example.therecipesecret.categorymealsdetails.viewmodel.CategoryMealsViewModelFactory
 import com.example.therecipesecret.common.model.CategoryMealsDetails
 import com.example.therecipesecret.common.repository.Repository
+import com.example.therecipesecret.common.retrofit.RetrofitInstance
 import com.example.therecipesecret.databinding.ActivityCategoryMealsBinding
+import com.example.therecipesecret.db.MealDataBase
 import com.example.therecipesecret.home.view.HomeFragment
 
 
@@ -24,23 +26,28 @@ class CategoryMealsActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryMealsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-        val repository = Repository()
-        val categoryViewModelFactory = CategoryMealsViewModelFactory(repository)
-        categoryViewModel = ViewModelProvider(this,
-            categoryViewModelFactory).get(CategoryMealsViewModel::class.java)
-
-
+        getViewModel()
 
         getInformationFromIntent()
         prepareCategoryMealsRecyclerView()
         observeCategoryMealsDetails()
 
+    }
+
+    private fun getViewModel() {
+        val mealDao = MealDataBase.getDataBaseInstance(applicationContext).getMealDao()
+        val mealApi = RetrofitInstance.api
+        val repository = Repository(mealDao,mealApi )
+        val categoryViewModelFactory = CategoryMealsViewModelFactory(repository)
+        categoryViewModel = ViewModelProvider(this,
+            categoryViewModelFactory).get(CategoryMealsViewModel::class.java)
     }
 
     private fun getInformationFromIntent() {

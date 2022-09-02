@@ -11,9 +11,10 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: Repository):ViewModel(){
 
-    var myRespone:MutableLiveData<MealList> =  MutableLiveData()
-    var result:MutableLiveData<PopularMealsList> = MutableLiveData()
-    var categoriesResponse:MutableLiveData<CategoryList> = MutableLiveData()
+     var myRespone:MutableLiveData<MealList> =  MutableLiveData()
+     var result:MutableLiveData<PopularMealsList> = MutableLiveData()
+     var categoriesResponse:MutableLiveData<CategoryList> = MutableLiveData()
+
 
 
     fun getRandomMeal(){
@@ -39,6 +40,8 @@ class HomeViewModel(private val repository: Repository):ViewModel(){
             categoriesResponse.value=response
         }
     }
+
+
 
 
 

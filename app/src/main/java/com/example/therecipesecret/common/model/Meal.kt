@@ -3,7 +3,7 @@ package com.example.therecipesecret.common.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "meals_information")
+@Entity(tableName = "meals_table")
 data class Meal(
     //add nullable as maybe the attributes will be null except the primary key
     val dateModified: Any?,

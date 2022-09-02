@@ -1,5 +1,6 @@
 package com.example.therecipesecret.home.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +22,9 @@ import com.example.therecipesecret.common.model.PopularMeals
 import com.example.therecipesecret.mealdetails.view.MealActivity
 import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.repository.Repository
+import com.example.therecipesecret.common.retrofit.RetrofitInstance
 import com.example.therecipesecret.databinding.FragmentHomeBinding
+import com.example.therecipesecret.db.MealDataBase
 import com.example.therecipesecret.home.viewmodel.HomeViewModel
 import com.example.therecipesecret.home.viewmodel.HomeViewModelFactory
 import com.squareup.picasso.Picasso
@@ -49,14 +52,13 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val repository = Repository()
-        val homeViewModelFactory = HomeViewModelFactory(repository)
-        homeViewModel=ViewModelProvider(this,homeViewModelFactory).get(HomeViewModel::class.java)
+        getViewModel()
 
         popularItemAdapter= MostPopularAdapter()
 
 
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -83,6 +85,16 @@ class HomeFragment : Fragment() {
         onCategoryItemClick()
 
 
+    }
+    private fun getViewModel() {
+
+        val mealDao = MealDataBase.getDataBaseInstance(requireContext()).getMealDao()
+        val mealApi = RetrofitInstance.api
+
+        val repository = Repository(mealDao,mealApi )
+
+        val homeViewModelFactory = HomeViewModelFactory(repository)
+        homeViewModel=ViewModelProvider(this,homeViewModelFactory).get(HomeViewModel::class.java)
     }
 
     private fun onCategoryItemClick() {

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.model.MealList
 import com.example.therecipesecret.common.repository.Repository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MealDetailsViewModel(private val repository: Repository) :ViewModel(){
@@ -17,6 +18,30 @@ class MealDetailsViewModel(private val repository: Repository) :ViewModel(){
       viewModelScope.launch {
          val response = repository.getRandomMealInformation(id)
          myRespone.value=response
+      }
+   }
+
+   fun insertMeal(meal: Meal){
+      viewModelScope.launch(Dispatchers.IO){
+         repository.addMeal(meal)
+      }
+   }
+
+   fun deleteMeal(meal: Meal){
+      viewModelScope.launch(Dispatchers.IO){
+         repository.deleteMeal(meal)
+      }
+   }
+
+   fun getAllMeals(){
+      viewModelScope.launch(Dispatchers.IO){
+         repository.getAllMealsFromDB
+      }
+   }
+
+   fun updateMeal(meal: Meal){
+      viewModelScope.launch(Dispatchers.IO){
+         repository.updateMeal(meal)
       }
    }
 

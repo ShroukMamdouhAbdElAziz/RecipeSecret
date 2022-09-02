@@ -1,10 +1,7 @@
 package com.example.therecipesecret.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.room.*
 import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.model.MealList
 import kotlinx.coroutines.selects.select
@@ -19,14 +16,17 @@ interface MealDao {
     // so work for insert and update at the same time
    // @Insert(onConflict = OnConflictStrategy.REPLACE)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMeal(meal: Meal)
 
     @Update
     suspend fun updateMeal(meal: Meal)
 
+    @Delete
+    suspend fun deleteMeal(meal: Meal)
 
-   @androidx.room.Query("SELECT* FROM meals_information")
+
+   @androidx.room.Query("SELECT* FROM meals_table")
    // not using suspend as the fun will return livedata
     fun getAllMeals():LiveData<List<Meal>>
 
