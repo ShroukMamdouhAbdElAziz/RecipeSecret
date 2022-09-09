@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.therecipesecret.common.model.Category
 import com.example.therecipesecret.databinding.CategoryItemBinding
+
 import com.squareup.picasso.Picasso
 
 

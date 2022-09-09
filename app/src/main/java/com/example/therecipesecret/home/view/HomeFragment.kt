@@ -87,7 +87,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun getViewModel() {
+    fun getViewModel() {
 
         val mealDao = MealDataBase.getDataBaseInstance(requireContext()).getMealDao()
         val mealApi = RetrofitInstance.api
