@@ -65,7 +65,7 @@ class FavoriteFragment : Fragment() {
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder,
-            )=true
+            ) = true
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
@@ -74,12 +74,13 @@ class FavoriteFragment : Fragment() {
                 favoriteViewModel.deleteMeal(favAdapter.differ.currentList[position])
 
                 // after delete the Meal, show the snackbar
-                Snackbar.make(requireView(),"Meal has been deleted",Snackbar.LENGTH_LONG).setAction(
-                    "Undo",View.OnClickListener {
-                        // once press on Undo , insert the meal again
-                        favoriteViewModel.insertMeal(favAdapter.differ.currentList[position])
-                    }
-                ).show()
+                Snackbar.make(requireView(), "Meal has been deleted", Snackbar.LENGTH_LONG)
+                    .setAction(
+                        "Undo", View.OnClickListener {
+                            // once press on Undo , insert the meal again
+                            favoriteViewModel.insertMeal(favAdapter.differ.currentList[position])
+                        }
+                    ).show()
             }
 
         }

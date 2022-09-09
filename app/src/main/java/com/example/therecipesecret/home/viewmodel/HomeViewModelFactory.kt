@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.therecipesecret.common.repository.Repository
 
 
-class HomeViewModelFactory(private val repository: Repository):ViewModelProvider.Factory {
+class HomeViewModelFactory(private val repository: Repository) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {

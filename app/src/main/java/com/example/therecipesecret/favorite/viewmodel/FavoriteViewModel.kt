@@ -11,25 +11,25 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class FavoriteViewModel (private val repository: Repository): ViewModel() {
-    var favoriteMeals: LiveData<List<Meal>> =  MutableLiveData()
+class FavoriteViewModel(private val repository: Repository) : ViewModel() {
+    var favoriteMeals: LiveData<List<Meal>> = MutableLiveData()
 
-    fun deleteMeal(meal: Meal){
-        viewModelScope.launch(Dispatchers.IO){
+    fun deleteMeal(meal: Meal) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.deleteMeal(meal)
         }
     }
 
-    fun getAllMeals(){
-        viewModelScope.launch(Dispatchers.IO){
-          var response =  repository.getAllMealsFromDB
-            favoriteMeals= response
+    fun getAllMeals() {
+        viewModelScope.launch(Dispatchers.IO) {
+            var response = repository.getAllMealsFromDB
+            favoriteMeals = response
         }
 
     }
 
-    fun insertMeal(meal: Meal){
-        viewModelScope.launch(Dispatchers.IO){
+    fun insertMeal(meal: Meal) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.addMeal(meal)
         }
     }

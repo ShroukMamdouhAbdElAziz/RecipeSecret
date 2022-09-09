@@ -30,15 +30,16 @@ import com.squareup.picasso.Picasso
 class MealActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMealBinding
-  //  lateinit var customToastBinding : CustomToastBinding
+
+    //  lateinit var customToastBinding : CustomToastBinding
     lateinit var mealDetailsViewModel: MealDetailsViewModel
 
 
-    lateinit var mealId:String
-    lateinit var mealName:String
-    lateinit var mealThumb:String
+    lateinit var mealId: String
+    lateinit var mealName: String
+    lateinit var mealThumb: String
 
-    lateinit var youtubeLink:String
+    lateinit var youtubeLink: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,26 +64,26 @@ class MealActivity : AppCompatActivity() {
 
     private fun onFavoriteClick() {
         binding.favBtn.setOnClickListener {
-           favMeal?.let {
-               mealDetailsViewModel.insertMeal(it)
-               Log.d("TestFav",favMeal.toString())
+            favMeal?.let {
+                mealDetailsViewModel.insertMeal(it)
+                Log.d("TestFav", favMeal.toString())
 
-             Toast.makeText(this,"the meal has been added to your Favorite list",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,
+                    "the meal has been added to your Favorite list",
+                    Toast.LENGTH_LONG).show()
 
 
-
-           }
+            }
         }
 
     }
-
 
 
     private fun getViewModel() {
         val mealDao = MealDataBase.getDataBaseInstance(this).getMealDao()
         val mealApi = RetrofitInstance.api
 
-        val repository = Repository(mealDao,mealApi )
+        val repository = Repository(mealDao, mealApi)
 
         val mealDetailsViewModelFactory = MealDetailsViewModelFactory(repository)
 
@@ -91,20 +92,20 @@ class MealActivity : AppCompatActivity() {
     }
 
 
-    private fun getMealDetailsFromIntent(){
-        val intent= getIntent()
-        mealId= intent.getStringExtra(HomeFragment.MEAL_ID)!!
-        mealName= intent.getStringExtra(HomeFragment.MEAL_NAME)!!
-        mealThumb=intent.getStringExtra(HomeFragment.MEAL_THUMB)!!
+    private fun getMealDetailsFromIntent() {
+        val intent = getIntent()
+        mealId = intent.getStringExtra(HomeFragment.MEAL_ID)!!
+        mealName = intent.getStringExtra(HomeFragment.MEAL_NAME)!!
+        mealThumb = intent.getStringExtra(HomeFragment.MEAL_THUMB)!!
 
     }
 
-    private fun setInformationInView(){
+    private fun setInformationInView() {
         Picasso.get()
             .load(mealThumb)
             .into(binding.imgMealDetails)
 
-        binding.collapsingToolBar.title=mealName
+        binding.collapsingToolBar.title = mealName
         binding.collapsingToolBar.setExpandedTitleColor(resources.getColor(R.color.white))
 
         // when the too;bar collapsed, the title will be in white color
@@ -113,48 +114,46 @@ class MealActivity : AppCompatActivity() {
     }
 
 
+    private var favMeal: Meal? = null
 
-    private var favMeal: Meal?=null
-
-    private fun observeMealDeatils(){
+    private fun observeMealDeatils() {
         mealDetailsViewModel.getRandomMealInformation(mealId)
         mealDetailsViewModel.myRespone.observe(this, Observer {
             responseCase()
-            favMeal= it.meals[0]
+            favMeal = it.meals[0]
             binding.tvArea.text = "Area : ${it.meals[0].strArea}"
-            binding.tvCategory.text= "Category : ${it.meals[0].strCategory}"
-            binding.instructionTxtViewSteps.text =it.meals[0].strInstructions
-            youtubeLink= it.meals[0].strYoutube!!
+            binding.tvCategory.text = "Category : ${it.meals[0].strCategory}"
+            binding.instructionTxtViewSteps.text = it.meals[0].strInstructions
+            youtubeLink = it.meals[0].strYoutube!!
         })
     }
 
 
     // show the progress bar when the data is still loading from the API and hiding all the views
-    private fun loadingCase(){
-        binding.favBtn.visibility=View.INVISIBLE
-        binding.instructionTxtViewSteps.visibility=View.INVISIBLE
-        binding.tvArea.visibility=View.INVISIBLE
-        binding.tvCategory.visibility=View.INVISIBLE
-        binding.imgYoutube.visibility=View.INVISIBLE
+    private fun loadingCase() {
+        binding.favBtn.visibility = View.INVISIBLE
+        binding.instructionTxtViewSteps.visibility = View.INVISIBLE
+        binding.tvArea.visibility = View.INVISIBLE
+        binding.tvCategory.visibility = View.INVISIBLE
+        binding.imgYoutube.visibility = View.INVISIBLE
     }
 
     // display all the views on the screen once the api response is done
-    private fun responseCase(){
-        binding.favBtn.visibility=View.VISIBLE
-        binding.instructionTxtViewSteps.visibility=View.VISIBLE
-        binding.tvArea.visibility=View.VISIBLE
-        binding.tvCategory.visibility=View.VISIBLE
-        binding.imgYoutube.visibility=View.VISIBLE
+    private fun responseCase() {
+        binding.favBtn.visibility = View.VISIBLE
+        binding.instructionTxtViewSteps.visibility = View.VISIBLE
+        binding.tvArea.visibility = View.VISIBLE
+        binding.tvCategory.visibility = View.VISIBLE
+        binding.imgYoutube.visibility = View.VISIBLE
     }
 
-    fun onYoutubeImageClick(){
+    fun onYoutubeImageClick() {
         binding.imgYoutube.setOnClickListener {
-            val intent =Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
             startActivity(intent)
 
         }
     }
-
 
 
 }

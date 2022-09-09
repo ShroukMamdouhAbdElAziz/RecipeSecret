@@ -33,22 +33,19 @@ import com.squareup.picasso.Picasso
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
-    lateinit var homeViewModel:HomeViewModel
+    lateinit var homeViewModel: HomeViewModel
     lateinit var randomMeal: Meal
     lateinit var popularItemAdapter: MostPopularAdapter
     lateinit var categoriesAdapter: CategoryAdapter
 
 
-
     // 3 keys for the extra for the Intent
-    companion object{
-        const val MEAL_ID ="com.example.therecipesecret.home.view.idMeal"
-        const val MEAL_NAME ="com.example.therecipesecret.home.view.strMeal"
-        const val MEAL_THUMB="com.example.therecipesecret.home.view.strMealThumb"
-        const val CATEGORY_NAME ="com.example.therecipesecret.home.view.categoryName"
+    companion object {
+        const val MEAL_ID = "com.example.therecipesecret.home.view.idMeal"
+        const val MEAL_NAME = "com.example.therecipesecret.home.view.strMeal"
+        const val MEAL_THUMB = "com.example.therecipesecret.home.view.strMealThumb"
+        const val CATEGORY_NAME = "com.example.therecipesecret.home.view.categoryName"
     }
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,16 +53,17 @@ class HomeFragment : Fragment() {
 
         getViewModel()
 
-        popularItemAdapter= MostPopularAdapter()
+        popularItemAdapter = MostPopularAdapter()
 
 
     }
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
+    ): View? {
 
-        binding= FragmentHomeBinding.inflate(inflater,container,false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
 
@@ -88,65 +86,66 @@ class HomeFragment : Fragment() {
 
 
     }
+
     private fun getViewModel() {
 
         val mealDao = MealDataBase.getDataBaseInstance(requireContext()).getMealDao()
         val mealApi = RetrofitInstance.api
 
-        val repository = Repository(mealDao,mealApi )
+        val repository = Repository(mealDao, mealApi)
 
         val homeViewModelFactory = HomeViewModelFactory(repository)
-        homeViewModel=ViewModelProvider(this,homeViewModelFactory).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this, homeViewModelFactory).get(HomeViewModel::class.java)
     }
 
     private fun onCategoryItemClick() {
-       categoriesAdapter.onItemClick={
-           val intent= Intent(activity,CategoryMealsActivity::class.java)
-           intent.putExtra(CATEGORY_NAME,it.strCategory)
-           startActivity(intent)
-       }
+        categoriesAdapter.onItemClick = {
+            val intent = Intent(activity, CategoryMealsActivity::class.java)
+            intent.putExtra(CATEGORY_NAME, it.strCategory)
+            startActivity(intent)
+        }
     }
 
     private fun onPopularItemClick() {
-       popularItemAdapter.onItemClick={
-           val intent= Intent(activity,MealActivity::class.java)
-           intent.putExtra(MEAL_ID,it.idMeal)
-           intent.putExtra(MEAL_NAME,it.strMeal)
-           intent.putExtra(MEAL_THUMB,it.strMealThumb)
-           startActivity(intent)
-       }
+        popularItemAdapter.onItemClick = {
+            val intent = Intent(activity, MealActivity::class.java)
+            intent.putExtra(MEAL_ID, it.idMeal)
+            intent.putExtra(MEAL_NAME, it.strMeal)
+            intent.putExtra(MEAL_THUMB, it.strMealThumb)
+            startActivity(intent)
+        }
     }
 
     private fun prepareCategoriesRecyclerView() {
         categoriesAdapter = CategoryAdapter()
-       binding.recViewCategories.apply {
-          layoutManager=GridLayoutManager(context,3, VERTICAL,false)
-           adapter=categoriesAdapter
-       }
+        binding.recViewCategories.apply {
+            layoutManager = GridLayoutManager(context, 3, VERTICAL, false)
+            adapter = categoriesAdapter
+        }
     }
 
-   /* fun displayRandomMeal(){
-        homeViewModel.getRandomMeal()
-        // observe the mutabledata object"myResponse"
-        homeViewModel.myRespone.observe(viewLifecycleOwner, Observer { response->
+    /* fun displayRandomMeal(){
+         homeViewModel.getRandomMeal()
+         // observe the mutabledata object"myResponse"
+         homeViewModel.myRespone.observe(viewLifecycleOwner, Observer { response->
 
-            randomMeal=response.meals[0]
-            var s=randomMeal.strMealThumb
-            Picasso.get()
-                .load(s)
-                .into(binding.imgRandomMeal)
+             randomMeal=response.meals[0]
+             var s=randomMeal.strMealThumb
+             Picasso.get()
+                 .load(s)
+                 .into(binding.imgRandomMeal)
 
 
-        })
-    }*/
+         })
+     }*/
 
-    fun displayRandomMeal(){
+    fun displayRandomMeal() {
         homeViewModel.getRandomMeal()
         // observe the mutabledata object"myResponse"
         homeViewModel.myRespone.observe(viewLifecycleOwner, Observer {
 
-            randomMeal=it.meals[0]
-            var s=randomMeal.strMealThumb
+            randomMeal = it.meals[0]
+            var s = randomMeal.strMealThumb
             Picasso.get()
                 .load(s)
                 .into(binding.imgRandomMeal)
@@ -155,19 +154,19 @@ class HomeFragment : Fragment() {
         })
     }
 
-    fun onRandomMealClick(){
+    fun onRandomMealClick() {
         binding.randmMealCard.setOnClickListener {
             val intent = Intent(activity, MealActivity::class.java)
-            intent.putExtra(MEAL_ID,randomMeal.idMeal)
-            intent.putExtra(MEAL_NAME,randomMeal.strMeal)
-            intent.putExtra(MEAL_THUMB,randomMeal.strMealThumb)
+            intent.putExtra(MEAL_ID, randomMeal.idMeal)
+            intent.putExtra(MEAL_NAME, randomMeal.strMeal)
+            intent.putExtra(MEAL_THUMB, randomMeal.strMealThumb)
             startActivity(intent)
 
         }
 
     }
 
-    fun observePopularItems(){
+    fun observePopularItems() {
         homeViewModel.getPopularItems("Seafood")
         homeViewModel.result.observe(viewLifecycleOwner, Observer {
             popularItemAdapter.setMeal(it.meals as ArrayList<PopularMeals>)
@@ -176,15 +175,15 @@ class HomeFragment : Fragment() {
 
 
     // setup RecyclerView
-    fun preparePopularItemsRecyclerView(){
+    fun preparePopularItemsRecyclerView() {
         binding.recViewMealsPopular.apply {
             // set the layoutManager
-            layoutManager=LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
-            adapter=popularItemAdapter
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = popularItemAdapter
         }
     }
 
-    fun observeCategories(){
+    fun observeCategories() {
         homeViewModel.getCategories()
         homeViewModel.categoriesResponse.observe(viewLifecycleOwner, Observer {
             categoriesAdapter.setCategoryList(it.categories as ArrayList<Category>)
