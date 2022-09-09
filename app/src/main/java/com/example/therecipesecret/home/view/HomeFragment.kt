@@ -39,9 +39,7 @@ class HomeFragment : Fragment() {
     lateinit var randomMeal: Meal
     lateinit var popularItemAdapter: MostPopularAdapter
     lateinit var categoriesAdapter: CategoryAdapter
-    val saveStateRandomMeal : Meal?= null
-
-
+    val saveStateRandomMeal: Meal? = null
 
 
     // 3 keys for the extra for the Intent
@@ -92,14 +90,13 @@ class HomeFragment : Fragment() {
         onPopularItemLongClick()
 
 
-
-
     }
+
 
     private fun onPopularItemLongClick() {
         popularItemAdapter.onLongItemClick = {
             val mealBottomSheetFragment = MealBottomSheet.newInstance(it.idMeal)
-            mealBottomSheetFragment.show(childFragmentManager,"mealInfo")
+            mealBottomSheetFragment.show(childFragmentManager, "mealInfo")
         }
     }
 

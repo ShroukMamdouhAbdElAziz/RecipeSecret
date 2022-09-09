@@ -29,6 +29,10 @@ class Repository(private val mealDao: MealDao,private val mealApi:MealApi){
         return mealApi.getMealsByCategoryName(strCategory)
     }
 
+    suspend fun searchOnMeal(searchQuery:String):MealList{
+        return  mealApi.searchMeals(searchQuery)
+    }
+
 
 
     val getAllMealsFromDB:LiveData<List<Meal>> = mealDao.getAllMeals()

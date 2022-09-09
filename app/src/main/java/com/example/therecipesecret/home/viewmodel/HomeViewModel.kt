@@ -40,6 +40,13 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
+    fun getMealBySearch(searchQuery:String) {
+        viewModelScope.launch {
+            var response = repository.searchOnMeal(searchQuery )
+            myRespone.value = response
+        }
+    }
+
 
 
 
