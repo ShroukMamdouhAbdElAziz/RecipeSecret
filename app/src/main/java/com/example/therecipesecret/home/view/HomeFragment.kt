@@ -24,6 +24,7 @@ import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.repository.Repository
 import com.example.therecipesecret.common.retrofit.RetrofitInstance
 import com.example.therecipesecret.databinding.FragmentHomeBinding
+import com.example.therecipesecret.db.MealDao
 import com.example.therecipesecret.db.MealDataBase
 import com.example.therecipesecret.home.viewmodel.HomeViewModel
 import com.example.therecipesecret.home.viewmodel.HomeViewModelFactory
@@ -36,6 +37,7 @@ class HomeFragment : Fragment() {
     lateinit var randomMeal: Meal
     lateinit var popularItemAdapter: MostPopularAdapter
     lateinit var categoriesAdapter: CategoryAdapter
+
 
 
     // 3 keys for the extra for the Intent
@@ -123,12 +125,27 @@ class HomeFragment : Fragment() {
        }
     }
 
-    fun displayRandomMeal(){
+   /* fun displayRandomMeal(){
         homeViewModel.getRandomMeal()
         // observe the mutabledata object"myResponse"
         homeViewModel.myRespone.observe(viewLifecycleOwner, Observer { response->
 
             randomMeal=response.meals[0]
+            var s=randomMeal.strMealThumb
+            Picasso.get()
+                .load(s)
+                .into(binding.imgRandomMeal)
+
+
+        })
+    }*/
+
+    fun displayRandomMeal(){
+        homeViewModel.getRandomMeal()
+        // observe the mutabledata object"myResponse"
+        homeViewModel.myRespone.observe(viewLifecycleOwner, Observer {
+
+            randomMeal=it.meals[0]
             var s=randomMeal.strMealThumb
             Picasso.get()
                 .load(s)

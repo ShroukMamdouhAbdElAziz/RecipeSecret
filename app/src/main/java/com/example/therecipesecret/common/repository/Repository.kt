@@ -14,7 +14,7 @@ class Repository(private val mealDao: MealDao,private val mealApi:MealApi){
     }
 
     suspend fun getRandomMealInformation(idMeal:String):MealList{
-        return  mealApi.getRandomMeal()
+        return  mealApi.getRandomMealInformation(idMeal)
     }
 
     suspend fun getPopularItems(categoryName:String): PopularMealsList{

@@ -27,17 +27,6 @@ class MealDetailsViewModel(private val repository: Repository) :ViewModel(){
       }
    }
 
-   fun deleteMeal(meal: Meal){
-      viewModelScope.launch(Dispatchers.IO){
-         repository.deleteMeal(meal)
-      }
-   }
-
-   fun getAllMeals(){
-      viewModelScope.launch(Dispatchers.IO){
-         repository.getAllMealsFromDB
-      }
-   }
 
    fun updateMeal(meal: Meal){
       viewModelScope.launch(Dispatchers.IO){

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/TheRecipeSecret/app/src/main/res/drawable/ic_favorite.xml" value="0.1205" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/drawable/round_custom_toast_corner.xml" value="0.138" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/font/fonts.xml" value="0.1" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/activity_category_meals.xml" value="0.20416666666666666" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/activity_main.xml" value="0.18" />
@@ -11,6 +12,7 @@
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/category_item.xml" value="0.1" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/category_meals_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/custom_toast.xml" value="0.20416666666666666" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_categories.xml" value="0.15555555555555556" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_favorite.xml" value="0.15555555555555556" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_home.xml" value="0.1" />

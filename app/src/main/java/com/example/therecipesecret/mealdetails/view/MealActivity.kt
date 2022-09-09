@@ -7,8 +7,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.therecipesecret.R
@@ -16,6 +18,7 @@ import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.repository.Repository
 import com.example.therecipesecret.common.retrofit.RetrofitInstance
 import com.example.therecipesecret.databinding.ActivityMealBinding
+import com.example.therecipesecret.databinding.CustomToastBinding
 import com.example.therecipesecret.db.MealDataBase
 import com.example.therecipesecret.home.view.HomeFragment
 import com.example.therecipesecret.mealdetails.viewmodel.MealDetailsViewModel
@@ -26,6 +29,7 @@ import com.squareup.picasso.Picasso
 class MealActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMealBinding
+  //  lateinit var customToastBinding : CustomToastBinding
     lateinit var mealDetailsViewModel: MealDetailsViewModel
 
     lateinit var mealId:String
@@ -38,11 +42,13 @@ class MealActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealBinding.inflate(layoutInflater)
+
+
         setContentView(binding.root)
 
-
-        getViewModel()
         getMealDetailsFromIntent()
+        getViewModel()
+
         setInformationInView()
         loadingCase()
 
@@ -57,11 +63,18 @@ class MealActivity : AppCompatActivity() {
         binding.favBtn.setOnClickListener {
            favMeal?.let {
                mealDetailsViewModel.insertMeal(it)
+               Log.d("TestFav",favMeal.toString())
+
+             Toast.makeText(this,"the meal has been added to your Favorite list",Toast.LENGTH_LONG).show()
+
 
 
            }
         }
+
     }
+
+
 
     private fun getViewModel() {
         val mealDao = MealDataBase.getDataBaseInstance(this).getMealDao()
@@ -112,7 +125,6 @@ class MealActivity : AppCompatActivity() {
             youtubeLink= it.meals[0].strYoutube!!
         })
     }
-
 
 
     // show the progress bar when the data is still loading from the API and hiding all the views

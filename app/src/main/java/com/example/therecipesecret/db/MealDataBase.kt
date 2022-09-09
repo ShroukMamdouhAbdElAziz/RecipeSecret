@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.*
 import com.example.therecipesecret.common.model.Meal
 
+
 @Database(entities = [Meal::class], version = 1, exportSchema = false)
 @TypeConverters(MealTypeConverter::class)
 
