@@ -20,6 +20,7 @@ import com.example.therecipesecret.common.retrofit.RetrofitInstance
 import com.example.therecipesecret.databinding.ActivityMealBinding
 import com.example.therecipesecret.databinding.CustomToastBinding
 import com.example.therecipesecret.db.MealDataBase
+import com.example.therecipesecret.favorite.viewmodel.FavoriteViewModel
 import com.example.therecipesecret.home.view.HomeFragment
 import com.example.therecipesecret.mealdetails.viewmodel.MealDetailsViewModel
 import com.example.therecipesecret.mealdetails.viewmodel.MealDetailsViewModelFactory
@@ -31,6 +32,7 @@ class MealActivity : AppCompatActivity() {
     lateinit var binding: ActivityMealBinding
   //  lateinit var customToastBinding : CustomToastBinding
     lateinit var mealDetailsViewModel: MealDetailsViewModel
+
 
     lateinit var mealId:String
     lateinit var mealName:String

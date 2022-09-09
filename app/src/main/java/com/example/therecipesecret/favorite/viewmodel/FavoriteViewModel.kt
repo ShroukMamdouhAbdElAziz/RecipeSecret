@@ -27,4 +27,10 @@ class FavoriteViewModel (private val repository: Repository): ViewModel() {
         }
 
     }
+
+    fun insertMeal(meal: Meal){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.addMeal(meal)
+        }
+    }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.therecipesecret.R
 import com.example.therecipesecret.common.repository.Repository
@@ -19,13 +20,13 @@ import com.example.therecipesecret.favorite.viewmodel.FavoriteViewModel
 import com.example.therecipesecret.favorite.viewmodel.FavoriteViewModelFactory
 import com.example.therecipesecret.home.viewmodel.HomeViewModel
 import com.example.therecipesecret.home.viewmodel.HomeViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 
 class FavoriteFragment : Fragment() {
     lateinit var binding: FragmentFavoriteBinding
     lateinit var favoriteViewModel: FavoriteViewModel
-    lateinit var favAdapter:FavoriteMealsAdapter
-
+    lateinit var favAdapter: FavoriteMealsAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,6 @@ class FavoriteFragment : Fragment() {
 
 
     }
-
 
 
     override fun onCreateView(
@@ -52,13 +52,47 @@ class FavoriteFragment : Fragment() {
 
         setUpRecyclerView()
         observeFavoriteMeals()
+
+        // anonymous class . // specify the direction that recyclerView scroll to
+        // add swipe direction in the constructor
+        val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(
+
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
+
+            // if we will takeAction when scroll up or down
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder,
+            )=true
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                // get the position of swipe Meal
+                val position = viewHolder.absoluteAdapterPosition
+                favoriteViewModel.deleteMeal(favAdapter.differ.currentList[position])
+
+                // after delete the Meal, show the snackbar
+                Snackbar.make(requireView(),"Meal has been deleted",Snackbar.LENGTH_LONG).setAction(
+                    "Undo",View.OnClickListener {
+                        // once press on Undo , insert the meal again
+                        favoriteViewModel.insertMeal(favAdapter.differ.currentList[position])
+                    }
+                ).show()
+            }
+
+        }
+
+        // attach the ItemTouchHelper to the RecyclerView
+        ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.rvFavorite)
     }
 
     private fun setUpRecyclerView() {
-        favAdapter= FavoriteMealsAdapter()
+        favAdapter = FavoriteMealsAdapter()
         binding.rvFavorite.apply {
-           layoutManager= GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
-            adapter= favAdapter
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+            adapter = favAdapter
         }
     }
 
@@ -69,16 +103,16 @@ class FavoriteFragment : Fragment() {
         val repository = Repository(mealDao, mealApi)
 
         val favoriteViewModelFactory = FavoriteViewModelFactory(repository)
-        favoriteViewModel = ViewModelProvider(this, favoriteViewModelFactory).get(FavoriteViewModel::class.java)
+        favoriteViewModel =
+            ViewModelProvider(this, favoriteViewModelFactory).get(FavoriteViewModel::class.java)
     }
-
 
 
     private fun observeFavoriteMeals() {
         favoriteViewModel.getAllMeals()
         favoriteViewModel.favoriteMeals.observe(viewLifecycleOwner, Observer {
             it.forEach {
-                Log.d("test",it.idMeal)
+                Log.d("test", it.idMeal)
 
             }
 
