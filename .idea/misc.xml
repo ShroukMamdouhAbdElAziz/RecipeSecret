@@ -13,9 +13,12 @@
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/category_item.xml" value="0.1" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/category_meals_item.xml" value="0.20416666666666666" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/custom_toast.xml" value="0.20416666666666666" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fav_meal_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_blank.xml" value="0.1" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_categories.xml" value="0.1" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_favorite.xml" value="0.15555555555555556" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/fragment_meal_bottom_sheet.xml" value="0.1" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/popular_items.xml" value="0.1" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/layout/popular_items_row_layout.xml" value="0.1" />
         <entry key="..\:/TheRecipeSecret/app/src/main/res/menu/bottomnavigation_menu.xml" value="0.15" />

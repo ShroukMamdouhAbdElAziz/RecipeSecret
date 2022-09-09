@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.databinding.CategoryItemBinding
+import com.example.therecipesecret.databinding.FavMealItemBinding
 import com.squareup.picasso.Picasso
 
 class FavoriteMealsAdapter :RecyclerView.Adapter<FavoriteMealsAdapter.FavoriteMealsAdapterViewHolder>() {
 
-    inner class FavoriteMealsAdapterViewHolder(val binding: CategoryItemBinding):RecyclerView.ViewHolder(binding.root)
+    inner class FavoriteMealsAdapterViewHolder(val binding: FavMealItemBinding):RecyclerView.ViewHolder(binding.root)
         // to enhance the recyclerView Peformance
         private val difUtil = object : DiffUtil.ItemCallback<Meal>(){
 
@@ -32,7 +33,7 @@ class FavoriteMealsAdapter :RecyclerView.Adapter<FavoriteMealsAdapter.FavoriteMe
         parent: ViewGroup,
         viewType: Int, ): FavoriteMealsAdapterViewHolder {
 
-        return FavoriteMealsAdapterViewHolder(CategoryItemBinding.inflate(
+        return FavoriteMealsAdapterViewHolder(FavMealItemBinding.inflate(
             LayoutInflater.from(parent.context),parent,false))
     }
 
@@ -40,9 +41,9 @@ class FavoriteMealsAdapter :RecyclerView.Adapter<FavoriteMealsAdapter.FavoriteMe
         val meal = differ.currentList[position]
         Picasso.get()
             .load(meal.strMealThumb)
-            .into(holder.binding.imgCategoty)
+            .into(holder.binding.imgFavMeal)
 
-        holder.binding.tvCategoryName.text = meal.strMeal
+        holder.binding.tvFavMealName.text= meal.strMeal
     }
 
     override fun getItemCount(): Int {

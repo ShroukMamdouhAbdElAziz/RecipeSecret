@@ -18,8 +18,6 @@ import com.example.therecipesecret.databinding.FragmentFavoriteBinding
 import com.example.therecipesecret.db.MealDataBase
 import com.example.therecipesecret.favorite.viewmodel.FavoriteViewModel
 import com.example.therecipesecret.favorite.viewmodel.FavoriteViewModelFactory
-import com.example.therecipesecret.home.viewmodel.HomeViewModel
-import com.example.therecipesecret.home.viewmodel.HomeViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -110,7 +108,7 @@ class FavoriteFragment : Fragment() {
 
 
     private fun observeFavoriteMeals() {
-        favoriteViewModel.getAllMeals()
+        favoriteViewModel.favoriteMeals
         favoriteViewModel.favoriteMeals.observe(viewLifecycleOwner, Observer {
             it.forEach {
                 Log.d("test", it.idMeal)

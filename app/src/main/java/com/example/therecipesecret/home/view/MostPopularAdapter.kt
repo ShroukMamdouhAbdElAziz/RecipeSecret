@@ -17,6 +17,7 @@ class MostPopularAdapter(): RecyclerView.Adapter<MostPopularAdapter.PopularMealV
     // You can use a lambda as the click callback, e.g. as a class property(method) of your adapter
     // the data type here(for the argument) is PopularMeals and the return is unit
     lateinit var onItemClick :((PopularMeals)->Unit)
+     var onLongItemClick :((PopularMeals)->Unit) ?= null
 
     private var mealsList = ArrayList<PopularMeals>()
 
@@ -40,6 +41,11 @@ class MostPopularAdapter(): RecyclerView.Adapter<MostPopularAdapter.PopularMealV
      // onitemclick handling
         holder.itemView.setOnClickListener {
             onItemClick.invoke(mealsList[position])
+        }
+
+        holder.itemView.setOnLongClickListener {
+            onLongItemClick?.invoke(mealsList[position])
+            true
         }
 
 

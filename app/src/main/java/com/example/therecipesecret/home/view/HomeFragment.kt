@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.therecipesecret.bottomsheet.view.MealBottomSheet
 import com.example.therecipesecret.categorymealsdetails.view.CategoryMealsActivity
 
 import com.example.therecipesecret.common.model.Category
@@ -37,6 +39,9 @@ class HomeFragment : Fragment() {
     lateinit var randomMeal: Meal
     lateinit var popularItemAdapter: MostPopularAdapter
     lateinit var categoriesAdapter: CategoryAdapter
+    val saveStateRandomMeal : Meal?= null
+
+
 
 
     // 3 keys for the extra for the Intent
@@ -84,8 +89,20 @@ class HomeFragment : Fragment() {
 
         onCategoryItemClick()
 
+        onPopularItemLongClick()
+
+
+
 
     }
+
+    private fun onPopularItemLongClick() {
+        popularItemAdapter.onLongItemClick = {
+            val mealBottomSheetFragment = MealBottomSheet.newInstance(it.idMeal)
+            mealBottomSheetFragment.show(childFragmentManager,"mealInfo")
+        }
+    }
+
 
     fun getViewModel() {
 
