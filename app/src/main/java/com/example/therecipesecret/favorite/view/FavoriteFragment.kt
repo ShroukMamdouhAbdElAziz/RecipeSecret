@@ -67,16 +67,21 @@ class FavoriteFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
+
                 // get the position of swipe Meal
                 val position = viewHolder.absoluteAdapterPosition
-                favoriteViewModel.deleteMeal(favAdapter.differ.currentList[position])
+
+                var favMeal = favAdapter.differ.currentList[position]
+
+                favoriteViewModel.deleteMeal(favMeal)
+
 
                 // after delete the Meal, show the snackbar
                 Snackbar.make(requireView(), "Meal has been deleted", Snackbar.LENGTH_LONG)
                     .setAction(
                         "Undo", View.OnClickListener {
                             // once press on Undo , insert the meal again
-                            favoriteViewModel.insertMeal(favAdapter.differ.currentList[position])
+                            favoriteViewModel.insertMeal(favMeal)
                         }
                     ).show()
             }
