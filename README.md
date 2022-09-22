@@ -11,18 +11,27 @@ is an app about Recipe Food and gives you full information about the selected me
 ![unnamed (5)](https://user-images.githubusercontent.com/104698688/189447562-f6c36ec8-42f6-4411-9b8e-55ad70b0eacd.jpg)
 [unnamed (1)](https://user-images.githubusercontent.com/104698688/189447570-6f4d47b1-df8d-45ba-8101-299b9bea0251.jpg)
 ![unnamed (2)](https://user-images.githubusercontent.com/104698688/189447572-4c7b0350-3c7c-447a-ace8-95130ecfc08a.jpg)
+![unnamed (6)](https://user-images.githubusercontent.com/104698688/189447545-255bfc3a-e447-4eb7-8e6a-f0e83a020701.jpg)
 
 
 # Libraries and technologies used :
 
-Navigation component : bottom Navigation 
+Navigation component : bottom Navigation
+
 Retrofit
-Coroutines![unnamed (6)](https://user-images.githubusercontent.com/104698688/189447545-255bfc3a-e447-4eb7-8e6a-f0e83a020701.jpg)
+
+Coroutines
+
 Room
+
 MVVM & Livedata
+
 ViewBinding
+
 Lottifiles animation librray
+
 Intuit library to support multiple screen size
+
 Picasso Library 
 
 
