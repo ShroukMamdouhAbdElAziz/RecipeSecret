@@ -85,9 +85,7 @@ class SearchFragment : Fragment() {
     private fun observeSearchMealsLiveData() {
 
         viewModel.observerSearchMealLiveData().observe(viewLifecycleOwner, Observer {
-          searchRecyclerViewAdapter.differ.submitList()
-
-
+          searchRecyclerViewAdapter.differ.submitList(it.meals)
 
         })
     }
