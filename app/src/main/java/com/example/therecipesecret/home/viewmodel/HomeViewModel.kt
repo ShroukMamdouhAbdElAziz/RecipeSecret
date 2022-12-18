@@ -17,10 +17,8 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     var myRespone: MutableLiveData<MealList> = MutableLiveData()
     var result: MutableLiveData<PopularMealsList> = MutableLiveData()
     var categoriesResponse: MutableLiveData<CategoryList> = MutableLiveData()
+    var searchedMealsLiveData:MutableLiveData<MealList> =  MutableLiveData()
 
-    private var _searchedMealsLiveData: MutableLiveData<MealList> = MutableLiveData()
-    val searchedMealsLiveData: LiveData<MealList>
-        get() = _searchedMealsLiveData
 
 
     fun getRandomMeal() {
@@ -51,13 +49,13 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     fun getMealBySearch(searchQuery: String){
         viewModelScope.launch {
             val mealList = repository.searchMeals(searchQuery)
-          mealList.let {
-                _searchedMealsLiveData.postValue(mealList)
+          mealList?.let {
+                searchedMealsLiveData.postValue(it)
             }
         }
     }
     // for search
-    fun observerSearchMealLiveData(): MutableLiveData<MealList> = _searchedMealsLiveData
+    fun observerSearchMealLiveData():LiveData<MealList> = searchedMealsLiveData
 
 
 }

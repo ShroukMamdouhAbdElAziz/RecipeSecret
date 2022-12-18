@@ -29,7 +29,7 @@ class Repository(private val mealDao: MealDao, private val mealApi: MealApi) {
         return mealApi.getMealsByCategoryName(strCategory)
     }
 
-    suspend fun searchMeals(searchQuery: String): MealList {
+    suspend fun searchMeals(searchQuery: String): MealList{
         return mealApi.searchMeals(searchQuery)
     }
 

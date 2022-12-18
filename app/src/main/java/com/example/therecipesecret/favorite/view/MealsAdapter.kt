@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso
 class MealsAdapter :RecyclerView.Adapter<MealsAdapter.FavoriteMealsAdapterViewHolder>() {
 
     inner class FavoriteMealsAdapterViewHolder(val binding: FavMealItemBinding):RecyclerView.ViewHolder(binding.root)
-        // to enhance the recyclerView Peformance
+        // to enhance the recyclerView Performance
         private val difUtil = object : DiffUtil.ItemCallback<Meal>(){
 
             override fun areItemsTheSame(oldItem: Meal, newItem: Meal): Boolean {

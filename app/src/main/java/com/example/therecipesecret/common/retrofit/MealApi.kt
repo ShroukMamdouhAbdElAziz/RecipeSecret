@@ -1,5 +1,6 @@
 package com.example.therecipesecret.common.retrofit
 
+import androidx.lifecycle.LiveData
 import com.example.therecipesecret.common.model.*
 import retrofit2.http.GET
 import retrofit2.http.Query
