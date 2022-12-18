@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.therecipesecret.R
+import com.example.therecipesecret.categorymealsdetails.view.CategoryMealsActivity
 import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.repository.Repository
 import com.example.therecipesecret.common.retrofit.RetrofitInstance
@@ -50,6 +51,7 @@ class MealActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         getMealDetailsFromIntent()
+
         getViewModel()
 
         setInformationInView()
@@ -99,6 +101,8 @@ class MealActivity : AppCompatActivity() {
         mealThumb = intent.getStringExtra(HomeFragment.MEAL_THUMB)!!
 
     }
+
+
 
     private fun setInformationInView() {
         Picasso.get()

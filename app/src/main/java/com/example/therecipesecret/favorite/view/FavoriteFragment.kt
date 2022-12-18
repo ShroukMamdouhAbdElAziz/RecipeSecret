@@ -31,7 +31,6 @@ class FavoriteFragment : Fragment() {
 
         getViewModel()
 
-
     }
 
 
@@ -55,7 +54,8 @@ class FavoriteFragment : Fragment() {
         val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(
 
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
-            ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
+            ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT
+        ) {
 
             // if we will takeAction when scroll up or down
             override fun onMove(
@@ -122,7 +122,10 @@ class FavoriteFragment : Fragment() {
             favAdapter.differ.submitList(it)
         })
 
+
     }
+
+
 
 
 }

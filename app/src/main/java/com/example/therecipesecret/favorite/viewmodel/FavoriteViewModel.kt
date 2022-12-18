@@ -12,7 +12,9 @@ import kotlinx.coroutines.launch
 
 
 class FavoriteViewModel(private val repository: Repository) : ViewModel() {
+
     var favoriteMeals: LiveData<List<Meal>> = repository.getAllMealsFromDB
+
 
     fun deleteMeal(meal: Meal) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -21,10 +23,11 @@ class FavoriteViewModel(private val repository: Repository) : ViewModel() {
     }
 
 
-
     fun insertMeal(meal: Meal) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addMeal(meal)
         }
     }
+
+
 }

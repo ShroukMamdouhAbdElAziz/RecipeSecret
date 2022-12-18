@@ -40,16 +40,6 @@ class HomeFragment : Fragment() {
     private lateinit var randomMeal: Meal
     private lateinit var popularItemAdapter: MostPopularAdapter
     private lateinit var categoriesAdapter: CategoryAdapter
- //   private lateinit var searchedMeals : List<Meal>
-
-
-    // 3 keys for the extra for the Intent
-    companion object {
-        const val MEAL_ID = "com.example.therecipesecret.home.view.idMeal"
-        const val MEAL_NAME = "com.example.therecipesecret.home.view.strMeal"
-        const val MEAL_THUMB = "com.example.therecipesecret.home.view.strMealThumb"
-        const val CATEGORY_NAME = "com.example.therecipesecret.home.view.categoryName"
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -147,20 +137,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    /* fun displayRandomMeal(){
-         homeViewModel.getRandomMeal()
-         // observe the mutabledata object"myResponse"
-         homeViewModel.myRespone.observe(viewLifecycleOwner, Observer { response->
-
-             randomMeal=response.meals[0]
-             var s=randomMeal.strMealThumb
-             Picasso.get()
-                 .load(s)
-                 .into(binding.imgRandomMeal)
-
-
-         })
-     }*/
 
     private fun displayRandomMeal() {
         homeViewModel.getRandomMeal()
@@ -214,5 +190,12 @@ class HomeFragment : Fragment() {
     }
 
 
+    // 3 keys for the extra for the Intent
+    companion object {
+        const val MEAL_ID = "com.example.therecipesecret.home.view.idMeal"
+        const val MEAL_NAME = "com.example.therecipesecret.home.view.strMeal"
+        const val MEAL_THUMB = "com.example.therecipesecret.home.view.strMealThumb"
+        const val CATEGORY_NAME = "com.example.therecipesecret.home.view.categoryName"
+    }
 
 }
