@@ -17,6 +17,8 @@ object RetrofitInstance {
         retrofit.create(MealApi::class.java)
     }
 
+
+
 }
 /*class RetrofitInstance{
     companion object {

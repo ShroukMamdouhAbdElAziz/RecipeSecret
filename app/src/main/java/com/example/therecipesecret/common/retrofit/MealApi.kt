@@ -1,9 +1,6 @@
 package com.example.therecipesecret.common.retrofit
 
-import com.example.therecipesecret.common.model.CategoryList
-import com.example.therecipesecret.common.model.CategoryMealsDetailsList
-import com.example.therecipesecret.common.model.PopularMealsList
-import com.example.therecipesecret.common.model.MealList
+import com.example.therecipesecret.common.model.*
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -26,5 +23,6 @@ interface MealApi {
    suspend fun getMealsByCategoryName(@Query("c")strCategory:String):CategoryMealsDetailsList
 
    @GET("search.php")
-   suspend fun searchMeals(@Query("s") searchQuery:String):MealList
+    suspend fun searchMeals(@Query("s") searchQuery:String):MealList
+
 }

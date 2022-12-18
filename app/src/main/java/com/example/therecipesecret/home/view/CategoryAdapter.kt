@@ -10,8 +10,8 @@ import com.squareup.picasso.Picasso
 
 
 class CategoryAdapter(): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
-
-    lateinit var onItemClick:((Category)->Unit)
+    // lambda expression
+    lateinit var onItemClick:(Category)->Unit
 
     private var categoryMeals = ArrayList<Category>()
 
@@ -22,7 +22,7 @@ class CategoryAdapter(): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder
     }
 
 
-
+// the no of calling of this methods equals the no of item in recyclerView ( calling one time for each item)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder(CategoryItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
@@ -39,6 +39,7 @@ class CategoryAdapter(): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder
         // handling on ItemClick
 
         holder.itemView.setOnClickListener {
+            // calling the lambda function using invoke()
             onItemClick.invoke(categoryMeals[position])
         }
     }

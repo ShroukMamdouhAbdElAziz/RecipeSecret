@@ -1,9 +1,12 @@
 package com.example.therecipesecret.home.viewmodel
 
+
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.therecipesecret.common.model.CategoryList
+import com.example.therecipesecret.common.model.Meal
 import com.example.therecipesecret.common.model.PopularMealsList
 import com.example.therecipesecret.common.model.MealList
 import com.example.therecipesecret.common.repository.Repository
@@ -14,6 +17,10 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     var myRespone: MutableLiveData<MealList> = MutableLiveData()
     var result: MutableLiveData<PopularMealsList> = MutableLiveData()
     var categoriesResponse: MutableLiveData<CategoryList> = MutableLiveData()
+
+    private var _searchedMealsLiveData: MutableLiveData<MealList> = MutableLiveData()
+    val searchedMealsLiveData: LiveData<MealList>
+        get() = _searchedMealsLiveData
 
 
     fun getRandomMeal() {
@@ -26,7 +33,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
 
     fun getPopularItems(categoryName: String) {
         viewModelScope.launch {
-            var response = repository.getPopularItems(categoryName)
+            val response = repository.getPopularItems(categoryName)
             result.value = response
 
         }
@@ -35,19 +42,22 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
 
     fun getCategories() {
         viewModelScope.launch {
-            var response = repository.getCategories()
+            val response = repository.getCategories()
             categoriesResponse.value = response
         }
     }
 
-    fun getMealBySearch(searchQuery:String) {
+    // for search
+    fun getMealBySearch(searchQuery: String){
         viewModelScope.launch {
-            var response = repository.searchOnMeal(searchQuery )
-            myRespone.value = response
+            val mealList = repository.searchMeals(searchQuery)
+          mealList.let {
+                _searchedMealsLiveData.postValue(mealList)
+            }
         }
     }
-
-
+    // for search
+    fun observerSearchMealLiveData(): MutableLiveData<MealList> = _searchedMealsLiveData
 
 
 }

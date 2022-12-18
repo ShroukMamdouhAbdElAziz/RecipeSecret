@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.therecipesecret.common.model.Meal
-import com.example.therecipesecret.databinding.CategoryItemBinding
 import com.example.therecipesecret.databinding.FavMealItemBinding
 import com.squareup.picasso.Picasso
+// used for favorite meals adapter and search adapter as they have the same layouts
 
-class FavoriteMealsAdapter :RecyclerView.Adapter<FavoriteMealsAdapter.FavoriteMealsAdapterViewHolder>() {
+class MealsAdapter :RecyclerView.Adapter<MealsAdapter.FavoriteMealsAdapterViewHolder>() {
 
     inner class FavoriteMealsAdapterViewHolder(val binding: FavMealItemBinding):RecyclerView.ViewHolder(binding.root)
         // to enhance the recyclerView Peformance
@@ -27,7 +27,7 @@ class FavoriteMealsAdapter :RecyclerView.Adapter<FavoriteMealsAdapter.FavoriteMe
         }
 
     // to setup the items in the recyclerView
-    val differ =AsyncListDiffer(this@FavoriteMealsAdapter,difUtil)
+    val differ =AsyncListDiffer(this@MealsAdapter,difUtil)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

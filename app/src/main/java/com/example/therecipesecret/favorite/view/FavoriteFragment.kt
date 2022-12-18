@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.therecipesecret.R
 import com.example.therecipesecret.common.repository.Repository
 import com.example.therecipesecret.common.retrofit.RetrofitInstance
 import com.example.therecipesecret.databinding.FragmentFavoriteBinding
@@ -24,7 +23,7 @@ import com.google.android.material.snackbar.Snackbar
 class FavoriteFragment : Fragment() {
     lateinit var binding: FragmentFavoriteBinding
     lateinit var favoriteViewModel: FavoriteViewModel
-    lateinit var favAdapter: FavoriteMealsAdapter
+    lateinit var favAdapter: MealsAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,7 +92,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        favAdapter = FavoriteMealsAdapter()
+        favAdapter = MealsAdapter()
         binding.rvFavorite.apply {
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             adapter = favAdapter
